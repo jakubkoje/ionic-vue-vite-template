@@ -29,12 +29,19 @@
       target="_blank"
     >Vue 3 Docs</a>
   </p>
+  <div class="flex justify-around">
+    <ion-button
+      @click="increaseCount"
+    >
+      count is: {{ count }}
+    </ion-button>
 
-  <ion-button
-    @click="increaseCount"
-  >
-    count is: {{ count }}
-  </ion-button>
+    <ion-button
+      @click="increaseCount2"
+    >
+      count2 is: {{ count2 }}
+    </ion-button>
+  </div>
   <p>
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
@@ -45,8 +52,8 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from 'vuex';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+import { useStore } from '@/store';
 
 withDefaults(defineProps<{ msg?: string }>(), { msg: 'Hello World!' });
 
@@ -54,4 +61,7 @@ const store = useStore();
 
 const count = computed(() => store.state.count);
 const increaseCount = () => store.commit('increment');
+
+const count2 = ref(0);
+const increaseCount2 = () => { count2.value += 1; };
 </script>

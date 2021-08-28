@@ -1,7 +1,10 @@
-import { createStore } from 'vuex';
+import { createStore, Store, useStore as baseUseStore } from 'vuex';
+import { InjectionKey } from 'vue';
+
+export const key: InjectionKey<Store<{count: number}>> = Symbol('store');
 
 // Create a new store instance.
-const store = createStore<{count: number}>({
+export const store = createStore<{count: number}>({
   state() {
     return {
       count: 0,
@@ -14,4 +17,6 @@ const store = createStore<{count: number}>({
   },
 });
 
-export default store;
+export function useStore(): Store<{count: number}> {
+  return baseUseStore(key);
+}

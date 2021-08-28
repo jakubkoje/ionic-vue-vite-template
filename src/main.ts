@@ -27,11 +27,11 @@ import '@/theme/variables.css';
 
 import App from '@/App.vue';
 import router from '@/router';
-import store from '@/store';
+import { store, key } from '@/store';
 
 const app = createApp(App)
   .use(IonicVue)
-  .use(store)
+  .use(store, key)
   .use(router);
 
 router.isReady().then(() => {
