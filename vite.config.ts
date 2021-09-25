@@ -3,8 +3,9 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import VitePluginWindicss from 'vite-plugin-windicss';
-import VitePluginComponents from 'vite-plugin-components';
-import VitePluginIcons, { ViteIconsResolver } from 'vite-plugin-icons';
+import Components from 'unplugin-vue-components/vite';
+import Icons from 'unplugin-icons/vite';
+import IconsResolver from 'unplugin-icons/resolver';
 
 function clearAndUpper(text: string) {
   return text.replace(/-/, '').toUpperCase();
@@ -23,9 +24,9 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    VitePluginComponents({
-      customComponentResolvers: [
-        ViteIconsResolver(),
+    Components({
+      resolvers: [
+        IconsResolver(),
         // eslint-disable-next-line consistent-return
         (name) => {
           if (name.startsWith('Ion')) {
@@ -34,7 +35,7 @@ export default defineConfig({
         },
       ],
     }),
-    VitePluginIcons(),
+    Icons({ compiler: 'vue3' }),
     VitePluginWindicss(),
   ],
 });
